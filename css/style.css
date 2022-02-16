@@ -1,0 +1,113 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    vertical-align: baseline;
+  }
+  header {
+    min-height: 8rem;
+    min-width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  main {
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+  }
+  h1 {
+    color: black;
+    font-family: monospace;
+    font-size: 3rem;
+    text-transform: uppercase;
+    padding: 1rem;
+    border-radius: 0.2rem;
+  }
+  section.principal {
+    height: 75%;
+    width: auto;
+    display: flex;
+    align-content: center;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 7rem;
+    background-color: white;
+  }
+  .botoes {
+    display: flex;
+    height: 10vh;
+    width: 90vw;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+  }
+  button {
+    height: 3rem;
+    width: 10rem;
+    cursor: pointer;
+    border-radius: 0.5rem;
+    text-transform: uppercase;
+    font-family: monospace;
+    font-size: 1.1rem;
+    background-color: transparent;
+    border: 0.15rem solid rgb(192, 192, 192);
+    transition: all 0.2s ease;
+  }
+  button:nth-child(1) {
+    background-color: #79FC02;
+  }
+  button:nth-child(1):hover {
+    border-color: #79FC02;
+    background-color: #79FC02;
+    transform: scaleY(1.1);
+  }
+  button:nth-child(2) {
+    background-color: #fed51b;
+  }
+  button:nth-child(2):hover {
+    border-color: #fed51b;
+    background-color: #fed51b;
+    transform: scaleY(1.1);
+  }
+  button:nth-child(3) {
+    background-color: #FE0010;
+  }
+  button:nth-child(3):hover {
+    border-color: #FE0010;
+    background-color: #FE0010;
+    transform: scaleY(1.1);
+    color: white;
+  }
+  button:nth-child(4) {
+    background-color:grey;
+  }
+  button:hover {
+    font-weight: bold;
+    
+}
+  #semaforo {
+    width: 184px;
+    height: 421px;
+    transition: all 0.5s ease-in-out;
+  }
+  #semaforo:hover {
+    cursor: help;
+    transform: scale(1.1);
+  }
+  
+  footer {
+    height: 5rem;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: black;
+    text-transform: uppercase;
+    font-weight: bold;
+    font-style: italic;
+  }
