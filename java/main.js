@@ -94,7 +94,7 @@ const clickButtonAmarelo = () =>{
     desligarAutomatico();
 }
 
-// EventListeners:
+/*Eventos do listenter*/
 buttonVerde.addEventListener("click", clickButtonVerde);
 buttonVermelho.addEventListener("click", clickButtonVermelho);
 buttonAmarelo.addEventListener("click", clickButtonAmarelo);
