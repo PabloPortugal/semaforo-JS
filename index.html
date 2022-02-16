@@ -1,41 +1,25 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Semáforo - JS</title>
-  <!-- links(head) -->
-  <script src="./java/main.js" defer="defer"></script>
-  <link rel="stylesheet" href="./css/style.css">
-    lin
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exercicio Semáforo</title>
+
+    <!-- Loading CSS -->
+    <link rel="stylesheet" href="./css/style.css">
+
+    <!-- Loading JS -->
+    <script src="./java/main.js" defer type="module"></script>
 </head>
 <body>
-  <main>
-    <header>
-      <h1>Semáforo</h1>
-    </header>
-
-    <section class="principal">
-      <div class="semaforo">
-        <img src="./img/desligado.png" id="semaforo" alt="Semáforo desligado"
-        title="Clique nos botões abaixo para brincar com o semáforo!">
-        <div class="status">
-          <span></span>
-          <span></span>
-        </div>
-      </div>
-      <div class="botoes">
-        <button type="button" id="btnVerde">Verde</button>
-        <button type="button" id="btnAmarelo">Amarelo</button>
-        <button type="button" id="btnVermelho">Vermelho</button>
-        <button type="button" id="btnAuto">Automático</button> 
-        <button type="button" id="btnParar">Parar</button>
+    <header><h1>Semáforo</h1></header>
+    <img src="./img/desligado.png" alt="semáforo" id="semaforo">
+    <div class="button_container">
+        <button id="button_verde">Verde</button>
+        <button id="button_amarelo">Amarelo</button>
+        <button id="button_vermelho">Vermelho</button>
+        <button id="button_automatico">Automático</button>
+        <button id="button_desligar">Parar</button>
     </div>
-    </section>
-    <footer></footer>
-  </main>
-  
- 
 </body>
-</html>

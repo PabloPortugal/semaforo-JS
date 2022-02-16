@@ -1,72 +1,102 @@
 "use strict";
 
-/* Variaveis para completar o btn */
+const semaforo = document.querySelector("#semaforo");
+const buttonVerde = document.querySelector("#button_verde");
+const buttonVermelho = document.querySelector("#button_vermelho");
+const buttonAmarelo = document.querySelector("#button_amarelo");
+const buttonAutomatico = document.querySelector("#button_automatico");
+const buttonDesligar = document.querySelector("#button_desligar");
 
-const semaforo       = document.querySelector("#semaforo");
-const btnVerde       = document.querySelector("#btnVerde");
-const btnAmarelo     = document.querySelector("#btnAmarelo");
-const btnVermelho    = document.querySelector("#btnVermelho");
-const btnAuto        = document.querySelector("#btnAuto");
-const btnParar        = document.querySelector("#btnParar");
-let interval    = null;
-
-
-/* Funções para mudar de cor o semaforo */
-
-function mudarCorPraVerde(semaforo) {
-  semaforo.setAttribute("src", "./img/verde.png");
-}
-function mudarCorPraAmarelo(semaforo) {
-  semaforo.setAttribute("src", "./img/amarelo.png");
-}
-function mudarCorPraVermelho(semaforo) {
-  semaforo.setAttribute("src", "./img/vermelho.png");
+/**
+ * Objeto responsavel por armazenas os caminhos para as 
+ * imagens das cores do semaforo
+ */
+const cores = {
+    verde: "./img/verde.png",
+    vermelho: "./img/vermelho.png",
+    amarelo: "./img/amarelo.png",
+    desligado: "./img/desligado.png",
 }
 
-function alternarCor(semaforo) {
-  const conteudoSrc = semaforo.getAttribute("src");
+let isAutomatico = false;
+let interval; // id do intervalo usado no modo automatico
+let proximaCor = cores.vermelho;
 
-  function checarCont(src, search) {
-    return src.includes(search);
-  };
+/**
+ * Defini a proxima cor na fila para ser ativa no semaforo
+ * 
+ * @returns {string} proxima cor
+ */
+const getProximaCor = () => {
+    let proximaCor;
 
-  // resolução 'funcional':
-  if(checarCont(conteudoSrc, "desligado")) {
-    mudarCorPraVerde(semaforo);
-  } else if(checarCont(conteudoSrc, "verde")) {
-    mudarCorPraAmarelo(semaforo);
-  } else if(checarCont(conteudoSrc, "amarelo")) {
-    mudarCorPraVermelho(semaforo);
-  } else {
-    mudarCorPraVerde(semaforo);
-  }
-}
-
-function alternarAuto(semaforo) {
-    const ligarAutomatico = () =>{
-        if (interval == null) {
-            interval = setInterval(() => trocarCor(semaforo), 1000);
-            buttonAutomatico.textContent = "Parar";
-        } else {
-            desligarAutomatico()
-        }
-    }
-  }
-function parar(semaforo){
-    const desligarAutomatico = () => {
-        clearInterval(interval);
-        buttonAutomatico.textContent = "Automático";
-        interval = null;
+    if (semaforo.src.includes("/verde.png")) {
+        proximaCor = cores.amarelo;
+    } else if (semaforo.src.includes("/vermelho.png")) {
+        proximaCor = cores.verde;
+    } else if (semaforo.src.includes("/amarelo.png")) {
+        proximaCor = cores.vermelho;
+    } else if (semaforo.src.includes("/desligado.png")){
+        proximaCor = cores.verde;
     }
 
+    return proximaCor;
 }
-  
-/* Listeners */
 
-semaforo.addEventListener("click", null);
-// para funções com parâmetros usar: () => function(parameter);
-btnVerde.addEventListener("click", () => mudarCorPraVerde(semaforo)); 
-btnAmarelo.addEventListener("click", () => mudarCorPraAmarelo(semaforo));
-btnVermelho.addEventListener("click", () => mudarCorPraVermelho(semaforo));
-btnAuto.addEventListener("click", () =>  alternarAuto(semaforo));
-btnParar.addEventListener("click",() => parar(semaforo));
+
+const trocarCor = (cor) => {
+    semaforo.src = cor
+    proximaCor = getProximaCor();
+};
+
+/**
+ * Função responsavel por ligar o modo automatico do semáforo
+ */
+const ligarAutomatico = () =>{
+    if (interval == null) {
+        interval = setInterval(() => trocarCor(proximaCor), 1000);
+        buttonAutomatico.textContent = "Parar";
+    } else {
+        desligarAutomatico()
+    }
+}
+
+/**
+ * Função responsavel por desligar o modo automatico do semáforo
+ */
+const desligarAutomatico = () => {
+    clearInterval(interval);
+    buttonAutomatico.textContent = "Automático";
+    interval = null;
+}
+
+/**
+ * Função responsavel por desligar o semafaro, parando o modo automatico
+ * e trocando a sua imagem
+ */
+const desligarSemaforo = () => {
+    desligarAutomatico();
+    trocarCor(cores.desligado);
+}
+
+const clickButtonVerde = () =>{
+    trocarCor(cores.verde);
+    desligarAutomatico();
+}
+
+const clickButtonVermelho = () =>{
+    trocarCor(cores.vermelho);
+    desligarAutomatico();
+}
+
+const clickButtonAmarelo = () =>{
+    trocarCor(cores.amarelo);
+    desligarAutomatico();
+}
+
+// EventListeners:
+buttonVerde.addEventListener("click", clickButtonVerde);
+buttonVermelho.addEventListener("click", clickButtonVermelho);
+buttonAmarelo.addEventListener("click", clickButtonAmarelo);
+buttonAutomatico.addEventListener("click", ligarAutomatico);
+buttonDesligar.addEventListener("click", desligarSemaforo);
